@@ -1,0 +1,12 @@
+%%activate your conda environment
+conda activate workers-app
+
+%% path to workers
+cd Desk*/code*/*celery*/wor*
+
+
+%% run workers
+celery -A hello worker --loglevel=INFO -P eventlet -c 1 -n worker1@%h
+celery -A hello worker --loglevel=INFO -P eventlet -c 1 -n worker2@%h
+celery -A hello worker --loglevel=INFO -P eventlet -c 1 -n worker3@%h
+celery -A hello worker --loglevel=INFO -P eventlet -c 1 -n worker4@%h
