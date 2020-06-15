@@ -28,14 +28,11 @@ amqp.connect(CONN_URL, (err,conn) => {
 })
 
 module.exports = {
-   sendRPCMessage: (message, rpcQueue) =>
+   sendRPCMessage: (message, rpcQueue, callback) =>
       {
          const correlationId = uuid.v4();
 
-         ch.responseEmitter.once(correlationId, (data) => {
-            // Do Something when task is done
-            console.log(data)
-         });
+         ch.responseEmitter.once(correlationId, callback);
 
          ch.sendToQueue(rpcQueue, Buffer.from(message), {
             correlationId,
