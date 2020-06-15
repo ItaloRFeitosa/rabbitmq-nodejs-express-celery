@@ -18,7 +18,7 @@ app.get("/:socket_id", async (req,res) => {
     const response =  sendRPCMessage(
         JSON.stringify(task), 
         'celery',
-        (data) => io.sockets.emit('teste', data) 
+        (data) => io.to(socket_id).emit('task.done', data) 
     );
     //console.log(response);
     return res.json({task_id: task.id})
